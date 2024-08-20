@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,30 +132,55 @@ public class SlayerUtils {
         return "";
     }
 
-    public static boolean isInSlayerArea() {
+    public static boolean isInCorrectSlayerArea() {
         String islandArea = Utils.getIslandArea();
         // remove location emoji e.g. ⏣
         islandArea = islandArea.replaceAll("\\P{InBasic_Latin}", "");
         islandArea = islandArea.strip();
-        return switch (islandArea) {
+        String slayerType = getSlayerType();
+        switch (islandArea) {
             case "Graveyard",
-                 "Coal Mine" -> true; // Revenant
+                 "Coal Mine" -> {
+                if (Objects.equals(slayerType, REVENANT)) {
+                    return true;
+                }
+            }
             case "Spider Mound",
                  "Arachne's Burrow",
                  "Arachne's Sanctuary",
-                 "Burning Desert" -> true; // Tarantula
+                 "Burning Desert" -> {
+                if (Objects.equals(slayerType, TARA)) {
+                    return true;
+                }
+            }
             case "Ruins",
-                 "Howling Cave" -> true; // Sven
+                 "Howling Cave" -> {
+                if (Objects.equals(slayerType, SVEN)) {
+                    return true;
+                }
+            }
             case "The End",
                  "Dragon's Nest",
                  "Void Sepulture",
-                 "Zealot Bruiser Hideout" -> true; // Voidgloom
+                 "Zealot Bruiser Hideout" -> {
+                if (Objects.equals(slayerType, VOIDGLOOM)) {
+                    return true;
+                }
+            }
             case "Stronghold",
                  "The Wasteland",
-                 "Smoldering Tomb" -> true; // Blaze
+                 "Smoldering Tomb" -> {
+                if (Objects.equals(slayerType, DEMONLORD)) {
+                    return true;
+                }
+            }
             case "Stillgore Château",
-                 "Oubliette" -> true; // Vampire
-            case null, default -> false;
-        };
+                 "Oubliette" -> {
+                if (Objects.equals(slayerType, VAMPIRE)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

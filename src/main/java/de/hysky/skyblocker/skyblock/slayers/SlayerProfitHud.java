@@ -15,14 +15,13 @@ public class SlayerProfitHud {
     private static final Logger LOGGER = LoggerFactory.getLogger(SlayerProfitHud.class);
     private static final MinecraftClient client = MinecraftClient.getInstance();
     public static final HashMap<ItemStack, Integer> droppedItemCount = new HashMap<>();
-    public static Integer spawnCost = 0;
-    public static Integer mobKillCoins = 0;
+    public static Integer spawnCost = 316700;
+    public static Integer mobKillCoins = 1358647342;
 
 
     public static void init() {
         HudRenderEvents.AFTER_MAIN_HUD.register((context, tickCounter) -> {
             if (!shouldRender()) {return;}
-//            droppedItemCount.clear();
             droppedItemCount.put(ItemRepository.getItemStack("ENDER_PEARL"), 137400);
             droppedItemCount.put(ItemRepository.getItemStack("SUMMONING_EYE"), 18);
             droppedItemCount.put(ItemRepository.getItemStack("ENCHANTED_ENDER_PEARL"), 3700);
@@ -34,7 +33,7 @@ public class SlayerProfitHud {
     private static boolean shouldRender() {
         return SkyblockerConfigManager.get().slayers.slayerProfitHud.enableHud
                 && client.player != null
-                && SlayerUtils.isInSlayerArea()
+                && SlayerUtils.isInCorrectSlayerArea()
                 && SlayerUtils.isInSlayerQuest();
     }
 
