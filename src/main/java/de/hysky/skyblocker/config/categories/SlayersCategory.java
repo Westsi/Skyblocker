@@ -3,13 +3,12 @@ package de.hysky.skyblocker.config.categories;
 import de.hysky.skyblocker.config.ConfigUtils;
 import de.hysky.skyblocker.config.SkyblockerConfig;
 import de.hysky.skyblocker.config.configs.SlayersConfig;
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.OptionGroup;
+import de.hysky.skyblocker.skyblock.slayers.SlayerProfitHudConfigScreen;
+import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
 public class SlayersCategory {
@@ -42,7 +41,18 @@ public class SlayersCategory {
                                 newValue -> config.slayers.highlightBosses = newValue)
                         .controller(ConfigUtils::createEnumCyclingListController)
                         .build())
-
+                .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("skyblocker.config.slayer.profitHud.enable"))
+                        .binding(defaults.slayers.slayerProfitHud.enableHud,
+                                () -> config.slayers.slayerProfitHud.enableHud,
+                                newValue -> config.slayers.slayerProfitHud.enableHud = newValue)
+                        .controller(ConfigUtils::createBooleanController)
+                        .build())
+                .option(ButtonOption.createBuilder()
+                        .name(Text.translatable("skyblocker.config.slayer.profitHud"))
+                        .text(Text.translatable("text.skyblocker.open"))
+                        .action((screen, opt) -> MinecraftClient.getInstance().setScreen(new SlayerProfitHudConfigScreen(screen)))
+                        .build())
                 //Enderman Slayer
                 .group(OptionGroup.createBuilder()
                         .name(Text.translatable("skyblocker.config.slayer.endermanSlayer"))

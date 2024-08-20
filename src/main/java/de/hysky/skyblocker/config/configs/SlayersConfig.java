@@ -28,6 +28,9 @@ public class SlayersConfig {
     @SerialEntry
     public BlazeSlayer blazeSlayer = new BlazeSlayer();
 
+    @SerialEntry
+    public SlayerProfitHud slayerProfitHud = new SlayerProfitHud();
+
     public static class EndermanSlayer {
         @SerialEntry
         public boolean enableYangGlyphsNotification = true;
@@ -94,5 +97,16 @@ public class SlayersConfig {
                 return I18n.translate("skyblocker.config.slayer.blazeSlayer.enableFirePillarAnnouncer.mode." + name());
             }
         }
+    }
+
+    public static class SlayerProfitHud {
+        @SerialEntry
+        public boolean enableHud = true;
+
+        @SerialEntry
+        public int x;
+
+        @SerialEntry
+        public int y;
     }
 }

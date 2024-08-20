@@ -92,6 +92,17 @@ public class SlayerUtils {
         return false;
     }
 
+    public static boolean isInSlayerQuest() {
+        try {
+            for (String line : Utils.STRING_SCOREBOARD) {
+                if (line.contains("Slayer Quest")) return true;
+            }
+        } catch (NullPointerException e) {
+            LOGGER.error("[Skyblocker] Error while checking if player is in slayer quest type", e);
+        }
+        return false;
+    }
+
     public static String getSlayerType() {
         try {
             for (String line : Utils.STRING_SCOREBOARD) {
@@ -102,5 +113,53 @@ public class SlayerUtils {
             LOGGER.error("[Skyblocker] Error while checking slayer type", e);
         }
         return "";
+    }
+
+    public static String getSlayerTier() {
+        try {
+            for (String line : Utils.STRING_SCOREBOARD) {
+                Matcher matcher = SLAYER_PATTERN.matcher(line);
+                if (matcher.find()) {
+                    String[] words = line.strip().split(" ");
+                    return words[words.length-1];
+                };
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            LOGGER.error("[Skyblocker] Error while checking slayer tier", e);
+        }
+        return "";
+    }
+
+    public static boolean isInSlayerArea() {
+        String islandArea = Utils.getIslandArea();
+        // remove location emoji e.g. ⏣
+        islandArea = islandArea.replaceAll("\\P{InBasic_Latin}", "");
+        islandArea = islandArea.strip();
+        return switch (islandArea) {
+            case "Graveyard",
+                 "Coal Mine"
+                    -> true; // Revenant
+            case "Spider Mound",
+                 "Arachne's Burrow",
+                 "Arachne's Sanctuary",
+                 "Burning Desert"
+                    -> true; // Tarantula
+            case "Ruins",
+                 "Howling Cave"
+                    -> true; // Sven
+            case "The End",
+                 "Dragon's Nest",
+                 "Void Sepulture",
+                 "Zealot Bruiser Hideout"
+                    -> true; // Voidgloom
+            case "Stronghold",
+                 "The Wasteland",
+                 "Smoldering Tomb"
+                    -> true; // Blaze
+            case "Stillgore Château",
+                 "Oubliette"
+                    -> true; // Vampire
+            case null, default -> false;
+        };
     }
 }
