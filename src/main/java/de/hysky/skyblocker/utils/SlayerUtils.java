@@ -64,10 +64,10 @@ public class SlayerUtils {
             boolean type = false;
             for (String line : Utils.STRING_SCOREBOARD) {
                 switch (line) {
-                    case String a when a.contains("Slayer Quest") -> { return false; }
+                    case String a when a.contains("Slayer Quest") -> {return false;}
                     case String b when b.contains("Slay the boss!") -> inFight = true;
                     case String c when c.contains(slayer) -> type = true;
-                    default -> { continue; }
+                    default -> {continue;}
                 }
                 if (inFight && type) return true;
             }
@@ -121,8 +121,9 @@ public class SlayerUtils {
                 Matcher matcher = SLAYER_PATTERN.matcher(line);
                 if (matcher.find()) {
                     String[] words = line.strip().split(" ");
-                    return words[words.length-1];
-                };
+                    return words[words.length - 1];
+                }
+                ;
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             LOGGER.error("[Skyblocker] Error while checking slayer tier", e);
@@ -137,28 +138,22 @@ public class SlayerUtils {
         islandArea = islandArea.strip();
         return switch (islandArea) {
             case "Graveyard",
-                 "Coal Mine"
-                    -> true; // Revenant
+                 "Coal Mine" -> true; // Revenant
             case "Spider Mound",
                  "Arachne's Burrow",
                  "Arachne's Sanctuary",
-                 "Burning Desert"
-                    -> true; // Tarantula
+                 "Burning Desert" -> true; // Tarantula
             case "Ruins",
-                 "Howling Cave"
-                    -> true; // Sven
+                 "Howling Cave" -> true; // Sven
             case "The End",
                  "Dragon's Nest",
                  "Void Sepulture",
-                 "Zealot Bruiser Hideout"
-                    -> true; // Voidgloom
+                 "Zealot Bruiser Hideout" -> true; // Voidgloom
             case "Stronghold",
                  "The Wasteland",
-                 "Smoldering Tomb"
-                    -> true; // Blaze
+                 "Smoldering Tomb" -> true; // Blaze
             case "Stillgore Château",
-                 "Oubliette"
-                    -> true; // Vampire
+                 "Oubliette" -> true; // Vampire
             case null, default -> false;
         };
     }

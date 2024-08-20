@@ -1,24 +1,15 @@
 package de.hysky.skyblocker.skyblock.slayers;
 
-import com.google.gson.JsonParser;
-import com.mojang.serialization.JsonOps;
 import de.hysky.skyblocker.config.SkyblockerConfigManager;
 import de.hysky.skyblocker.events.HudRenderEvents;
 import de.hysky.skyblocker.skyblock.itemlist.ItemRepository;
-import de.hysky.skyblocker.skyblock.itemlist.ItemStackBuilder;
-import de.hysky.skyblocker.skyblock.tabhud.util.Ico;
 import de.hysky.skyblocker.utils.SlayerUtils;
-import de.hysky.skyblocker.utils.Utils;
-import io.github.moulberry.repo.data.NEUItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.BuiltinRegistries;
-import org.checkerframework.checker.units.qual.N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class SlayerProfitHud {
     private static final Logger LOGGER = LoggerFactory.getLogger(SlayerProfitHud.class);

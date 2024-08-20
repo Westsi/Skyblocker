@@ -1,19 +1,14 @@
 package de.hysky.skyblocker.skyblock.slayers;
 
 import de.hysky.skyblocker.config.SkyblockerConfigManager;
-import de.hysky.skyblocker.injected.SkyblockerStack;
-import de.hysky.skyblocker.skyblock.tabhud.util.Ico;
 import de.hysky.skyblocker.skyblock.tabhud.widget.Widget;
 import de.hysky.skyblocker.skyblock.tabhud.widget.component.PlainTextComponent;
 import de.hysky.skyblocker.utils.SlayerUtils;
-import de.hysky.skyblocker.utils.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -23,7 +18,7 @@ public class SlayerProfitHudWidget extends Widget {
 
     public SlayerProfitHudWidget() {
         super(Text.literal(SlayerUtils.getSlayerType() + " " + SlayerUtils.getSlayerTier() + " Profit")
-                .formatted(Formatting.YELLOW, Formatting.BOLD),
+                        .formatted(Formatting.YELLOW, Formatting.BOLD),
                 Formatting.GOLD.getColorValue());
         setX(SkyblockerConfigManager.get().slayers.slayerProfitHud.x);
         setY(SkyblockerConfigManager.get().slayers.slayerProfitHud.y);
