@@ -4,6 +4,7 @@ import de.hysky.skyblocker.config.SkyblockerConfigManager;
 import de.hysky.skyblocker.events.HudRenderEvents;
 import de.hysky.skyblocker.skyblock.itemlist.ItemRepository;
 import de.hysky.skyblocker.utils.SlayerUtils;
+import de.hysky.skyblocker.utils.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import org.slf4j.Logger;
@@ -12,11 +13,16 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 public class SlayerProfitHud {
+    /*
+    * TODO:
+    *  actually update this stuff from what happens. I assume I need to create callback for Purse Change to track kills and spawn costs, some chat message stuff
+    *  inventory pickup stuff, and somehow sack change stuff
+    * */
     private static final Logger LOGGER = LoggerFactory.getLogger(SlayerProfitHud.class);
     private static final MinecraftClient client = MinecraftClient.getInstance();
     public static final HashMap<ItemStack, Integer> droppedItemCount = new HashMap<>();
     public static Integer spawnCost = 316700;
-    public static Integer mobKillCoins = 1358647342;
+    public static Integer mobKillCoins = 0;
 
 
     public static void init() {
@@ -28,6 +34,7 @@ public class SlayerProfitHud {
             SlayerProfitHudWidget.INSTANCE.update();
             SlayerProfitHudWidget.INSTANCE.render(context, SkyblockerConfigManager.get().uiAndVisuals.tabHud.enableHudBackground);
         });
+
     }
 
     private static boolean shouldRender() {
